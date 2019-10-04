@@ -6,23 +6,21 @@ import authenticated from './helpers/auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
-    authenticated() ? (
-      <Component {...props} />
-    ) : (
-      <Redirect to={{ pathname: '/', state: {from: props.location} }} />
-    )
+    authenticated() 
+      ? <Component {...props} />
+      : <Redirect to={{ pathname: '/login', state: {from: props.location} }} />
   )} />
 );
 
 const Routes = () => {
-  return(
+  return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
-        <Route path="*" component={Error}/>
         <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+        <Route path="*" component={Error}/>
       </Switch>
     </BrowserRouter>
   );

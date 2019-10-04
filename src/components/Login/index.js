@@ -41,7 +41,7 @@ const Main = props => {
         id="login"
         className="col col-lg-5"
         header={
-          <h1 className="h3 mb-3 font-weight-normal text-center">Login</h1>
+          <p className="h3 mb-3 font-weight-normal text-center">Login</p>
         }
       >
         {redirect ? (
@@ -55,7 +55,7 @@ const Main = props => {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
-                seu@email.com
+                Email
               </span>
             </div>
             <input
@@ -71,7 +71,7 @@ const Main = props => {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">
-                <b>* * * * * * * * * * *</b>
+                Senha
               </span>
             </div>
             <input
@@ -96,7 +96,7 @@ const Main = props => {
             Entrar
           </button>
           <span>Não possui uma conta? </span><Link to="/register">Cadastre-se.</Link>
-          <p className="mt-5 mb-3 text-muted">&copy; 2019</p>
+          <p className="mt-5 mb-3 text-muted text-center">&copy; 2019</p>
         </form>
       </Card>
     </div>

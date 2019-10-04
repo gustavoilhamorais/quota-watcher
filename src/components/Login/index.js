@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import Card from "../models/Card";
 
 const Main = props => {
@@ -92,9 +92,10 @@ const Main = props => {
             />{" "}
             Lembrar de mim
           </label>
-          <button className="btn btn-lg btn-primary btn-block" type="submit">
+          <button className="btn btn-lg btn-primary btn-block mb-3 mt-2" type="submit">
             Entrar
           </button>
+          <span>Não possui uma conta? </span><Link to="/register">Cadastre-se.</Link>
           <p className="mt-5 mb-3 text-muted">&copy; 2019</p>
         </form>
       </Card>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
+import Card from "../models/Card";
 
 const Main = props => {
   const [email, setEmail] = useState("");
@@ -35,68 +36,68 @@ const Main = props => {
   }, []);
 
   return (
-    <div className="col col-lg-5">
-      {redirect ? (
-        <Redirect
-          to={{ pathname: "/dashboard", state: { from: props.location } }}
-        />
-      ) : (
-        <></>
-      )}
-      <form className="form-signin" onSubmit={form => handleSubmit(form)}>
-        <img
-          className="mb-4"
-          src="../assets/log-in.svg"
-          alt="Logo"
-          width="100"
-          height="100"
-        />
-        <h1 className="h3 mb-3 font-weight-normal">Faça login</h1>
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">
-              seu@email.com
-            </span>
-          </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Usuário"
-            aria-label="Usuário"
-            aria-describedby="basic-addon1"
-            value={email}
-            onChange={input => setEmail(input.target.value)}
+    <div className="container h-100 d-flex justify-content-center mt-5">
+      <Card
+        id="login"
+        className="col col-lg-5"
+        header={
+          <h1 className="h3 mb-3 font-weight-normal text-center">Login</h1>
+        }
+      >
+        {redirect ? (
+          <Redirect
+            to={{ pathname: "/dashboard", state: { from: props.location } }}
           />
-        </div>
-        <div className="input-group mb-3">
-          <div className="input-group-prepend">
-            <span className="input-group-text" id="basic-addon1">
-              <b>* * * * * * * * * * *</b>
-            </span>
+        ) : (
+          <></>
+        )}
+        <form className="form-signin" onSubmit={form => handleSubmit(form)}>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                seu@email.com
+              </span>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Usuário"
+              aria-label="Usuário"
+              aria-describedby="basic-addon1"
+              value={email}
+              onChange={input => setEmail(input.target.value)}
+            />
           </div>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Senha"
-            aria-label="Senha"
-            aria-describedby="basic-addon1"
-            value={password}
-            onChange={input => setPassword(input.target.value)}
-          />
-        </div>
-        <label>
-          <input
-            type="checkbox"
-            value={rememberMe}
-            onChange={() => handleRememberMe()}
-          />{" "}
-          Lembrar de mim
-        </label>
-        <button className="btn btn-lg btn-primary btn-block" type="submit">
-          Entrar
-        </button>
-        <p className="mt-5 mb-3 text-muted">&copy; 2019</p>
-      </form>
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text" id="basic-addon1">
+                <b>* * * * * * * * * * *</b>
+              </span>
+            </div>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Senha"
+              aria-label="Senha"
+              aria-describedby="basic-addon1"
+              value={password}
+              onChange={input => setPassword(input.target.value)}
+            />
+          </div>
+          <label>
+            <input
+              type="checkbox"
+              value={rememberMe}
+              onChange={() => handleRememberMe()}
+            />{" "}
+            Lembrar de mim
+          </label>
+          <button className="btn btn-lg btn-primary btn-block" type="submit">
+            Entrar
+          </button>
+          <p className="mt-5 mb-3 text-muted">&copy; 2019</p>
+        </form>
+      </Card>
     </div>
   );
 };

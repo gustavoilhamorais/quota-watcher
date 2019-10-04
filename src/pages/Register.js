@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
+import Main from "../components/Register";
+import '../index.css';
 
-const Register = props => (
-    <h1>Register</h1>
-);
+const Register = () => <Main />
 
 export default Register;

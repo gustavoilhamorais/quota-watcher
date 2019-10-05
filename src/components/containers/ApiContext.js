@@ -1,34 +1,36 @@
 import React, { useState, useEffect, createContext } from "react";
-import data from "../../mocks/hb_finance-response";
+import axios from 'axios';
 export const Data = createContext();
 
 const ApiContext = ({ children }) => {
-  const [loading, setLoading] = useState(true);
-  const [bitcoin, setBitcoin] = useState({});
-  const [currencies, setCurrencies] = useState({});
-  const [stocks, setStocks] = useState({});
-  const [taxes, setTaxes] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  const [selected, setSelected] = useState("");
 
-  const fetchApi = () => {
-    setBitcoin(data.results.bitcoin);
-    setCurrencies(data.results.currencies);
-    setStocks(data.results.stocks);
-    setTaxes(data.results.taxes);
-    setLoading(false);
+  const fetchApi = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.get(`https://api.hgbrasil.com/finance/stock_price?format=json-cors&key=6927cc32&symbol=${selected}`);
+      if (response.status === 200) setData(response.data.results[selected]);
+      setLoading(false);
+    } catch (error) { console.log(error); }
   };
 
   useEffect(() => {
-    fetchApi();
-  }, []);
+    if (data) console.log(data);
+  }, [data])
+
+  useEffect(() => {
+    if (selected) fetchApi();
+  }, [selected]);
 
   return (
     <Data.Provider
       value={{
-        bitcoin,
-        currencies,
-        stocks,
-        taxes,
-        isLoading: loading
+        data,
+        selected,
+        isLoading: loading,
+        select: option => setSelected(option.toUpperCase())
       }}
     >
       {children}

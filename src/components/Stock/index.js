@@ -10,7 +10,7 @@ const Main = () => {
       <Data.Consumer>
         {provider => (
           <>
-            <Dropdown title="IBOVESPA">
+            <Dropdown title="Selecionar Ações">
               <button className="dropdown-item" onClick={() => provider.select("bidi4")}>
                 Banco Inter S.A.
               </button>

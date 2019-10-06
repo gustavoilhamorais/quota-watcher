@@ -20,20 +20,24 @@ const CryptoContext = ({ children }) => {
   };
 
   const handleSelection = () => {
-    if (selected === "BLOCKCHAIN") {
-      setData(apiResponse["blockchain_info"]);
-    } else if (selected === "COINBASE") {
-      setData(apiResponse["coinbase"]);
-    } else if (selected === "BITSTAMP") {
-      setData(apiResponse["bitstamp"]);
-    } else if (selected === "FOXBIT") {
-      setData(apiResponse["foxbit"]);
-    } else if (selected === "MERCABITCOIN") {
-      setData(apiResponse["mercadobitcoin"]);
-    } else if (selected === "OMNITRADE") {
-      setData(apiResponse["omnitrade"]);
-    } else if (selected === "XDEX") {
-      setData(apiResponse["xdex"]);
+    if (loading) {
+      window.alert("Por favor, aguarde o carregamento.");
+    } else  {
+      if (selected === "BLOCKCHAIN") {
+        setData(apiResponse["blockchain_info"]);
+      } else if (selected === "COINBASE") {
+        setData(apiResponse["coinbase"]);
+      } else if (selected === "BITSTAMP") {
+        setData(apiResponse["bitstamp"]);
+      } else if (selected === "FOXBIT") {
+        setData(apiResponse["foxbit"]);
+      } else if (selected === "MERCABITCOIN") {
+        setData(apiResponse["mercadobitcoin"]);
+      } else if (selected === "OMNITRADE") {
+        setData(apiResponse["omnitrade"]);
+      } else if (selected === "XDEX") {
+        setData(apiResponse["xdex"]);
+      }
     }
   }
 

@@ -1,7 +1,6 @@
-import React from 'react'
+import React from "react";
+import Main from "../components/Home";
 
-const Home = props => (
-    <h1>Home</h1>
-);
+const Home = props => <Main />;
 
 export default Home;

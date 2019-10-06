@@ -12,7 +12,7 @@ const CryptoContext = ({ children }) => {
   const fetchApi = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,bitcoin&key=b61331af`);
+      const response = await axios.get(`https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,bitcoin&key=6927cc32`);
       if (response.status === 200) setApiResponse(response.data.bitcoin);
       setLoading(false);
       setUpdate(true);

@@ -7,6 +7,7 @@ const CryptoContext = ({ children }) => {
   const [apiResponse, setApiResponse] = useState(null);
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
+  const [update, setUpdate] = useState(false);
 
   const fetchApi = async () => {
     try {
@@ -14,6 +15,7 @@ const CryptoContext = ({ children }) => {
       const response = await axios.get(`https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,bitcoin&key=b61331af`);
       if (response.status === 200) setApiResponse(response.data.bitcoin);
       setLoading(false);
+      setUpdate(true);
     } catch (error) { console.log(error); }
   };
 
@@ -35,8 +37,22 @@ const CryptoContext = ({ children }) => {
     }
   }
 
+  var timeout;
+
+  const startCounter = () => {
+    timeout = setTimeout(() => {
+      fetchApi();
+      setUpdate(false);
+    }, 30000);
+  }
+
   useEffect(() => {
-    fetchApi();
+    if (update) startCounter();
+    else clearTimeout(timeout);
+  }, [update]);
+
+  useEffect(() => {
+    if (!update) fetchApi();
   }, []);
 
   useEffect(() => {

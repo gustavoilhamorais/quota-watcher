@@ -6,6 +6,7 @@ const StockContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
+  const [update, setUpdate] = useState(false);
 
   const fetchApi = async () => {
     try {
@@ -13,16 +14,27 @@ const StockContext = ({ children }) => {
       const response = await axios.get(`https://api.hgbrasil.com/finance/stock_price?format=json-cors&key=6927cc32&symbol=${selected}`);
       if (response.status === 200) setData(response.data.results[selected]);
       setLoading(false);
+      setUpdate(true);
     } catch (error) { console.log(error); }
   };
+
+  var timeout;
+
+  const startCounter = () => {
+    timeout = setTimeout(() => {
+      fetchApi();
+      setUpdate(false);
+    }, 30000);
+  }
+
+  useEffect(() => {
+    if (update) startCounter();
+    else clearTimeout(timeout);
+  }, [update]);
 
   useEffect(() => {
     if (selected) fetchApi();
   }, [selected]);
-
-  const loader = () => {
-    for (let index = 0; index < 1000; index++) return(index);
-  }
 
   return (
     <Data.Provider
@@ -30,7 +42,6 @@ const StockContext = ({ children }) => {
         data,
         selected,
         isLoading: loading,
-        loader: () => loader(),
         select: option => setSelected(option.toUpperCase())
       }}
     >

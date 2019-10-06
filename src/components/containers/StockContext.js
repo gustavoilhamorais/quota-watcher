@@ -4,14 +4,15 @@ export const Data = createContext();
 
 const StockContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
   const [update, setUpdate] = useState(false);
 
   const fetchApi = async () => {
     try {
-      setLoading(true);
-      const response = await axios.get(`https://api.hgbrasil.com/finance/stock_price?format=json-cors&key=6927cc32&symbol=${selected}`);
+      if (!counter) setLoading(true);
+      const response = await axios.get(`https://api.hgbrasil.com/finance/stock_price?format=json-cors&key=bd1ec7bd&symbol=${selected}`);
       if (response.status === 200) setData(response.data.results[selected]);
       setLoading(false);
       setUpdate(true);
@@ -33,7 +34,10 @@ const StockContext = ({ children }) => {
   }, [update]);
 
   useEffect(() => {
-    if (selected) fetchApi();
+    if (selected) {
+      fetchApi();
+      setCounter(1);
+    }
   }, [selected]);
 
   return (

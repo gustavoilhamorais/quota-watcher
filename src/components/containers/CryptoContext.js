@@ -4,6 +4,7 @@ export const Data = createContext();
 
 const CryptoContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
   const [apiResponse, setApiResponse] = useState(null);
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
@@ -11,8 +12,8 @@ const CryptoContext = ({ children }) => {
 
   const fetchApi = async () => {
     try {
-      setLoading(true);
-      const response = await axios.get(`https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,bitcoin&key=6927cc32`);
+      if (!counter) setLoading(true);
+      const response = await axios.get(`https://api.hgbrasil.com/finance?format=json-cors&array_limit=1&fields=only_results,bitcoin&key=bd1ec7bd`);
       if (response.status === 200) setApiResponse(response.data.bitcoin);
       setLoading(false);
       setUpdate(true);
@@ -57,6 +58,7 @@ const CryptoContext = ({ children }) => {
 
   useEffect(() => {
     if (!update) fetchApi();
+    setCounter(1);
   }, []);
 
   useEffect(() => {

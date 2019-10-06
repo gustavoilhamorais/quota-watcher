@@ -9,12 +9,16 @@ const Main = props => {
   const [redirect, setRedirect] = useState(0);
 
   const validateLogin = () => {
-    const createdAccounts = JSON.parse(localStorage.getItem("@QuotaWatcher#CreatedAccounts"));
-    const isRegistered = createdAccounts[email];
-    if (isRegistered) {
-      if (createdAccounts[email].password === password) return true;
-      else return 'Senha inválida';
-    } else return 'Conta não existe';
+    try {
+      const createdAccounts = JSON.parse(localStorage.getItem("@QuotaWatcher#CreatedAccounts"));
+      const isRegistered = createdAccounts[email];
+      if (isRegistered) {
+        if (createdAccounts[email].password === password) return true;
+        else return 'Senha inválida';
+      } else return 'Conta não existe';
+    } catch (error) {
+      return ("Não foi possível realizar login.");
+    }
   }
 
   const handleSubmit = form => {

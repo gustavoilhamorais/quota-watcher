@@ -1,7 +1,8 @@
 import Home from './Home';
-import Dashboard from './Dashboard';
 import Login from './Login';
 import Register from './Register';
 import Error from './Error';
+import Stock from './Stock';
+import Crypto from './Crypto';
 
-export { Home, Dashboard, Login, Register, Error }
+export { Home, Login, Register, Error, Stock, Crypto }

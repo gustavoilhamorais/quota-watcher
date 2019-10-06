@@ -7,16 +7,16 @@ const ChartModel = ({ id, series, title, coin }) => {
     <Card className="mt-5" id={id} header={
       <h3 className="text-center">{title}</h3>}>
       <div className="row d-flex justify-content-center">
-        <Chart width={900} height={380} series={series} minY={-100} maxY={1000000}>
+        <Chart width={900} height={380} series={series} minY={-1000} maxY={700000}>
           <Title position="middle center" style={{ textAnchor: "middle" }}>
             {coin}
           </Title>
-          <Bars colors="category10" innerPadding="0.5%" groupPadding="5%" />
+          <Bars innerPadding="0.5%" groupPadding="5%" />
           <Layer width="95%" height="100%" position="center top">
-            <Dots />
+            <Dots ellipseRadiusY={10} dotType="symbol" symbolType="diamond"/>
             <Labels
               label={({ point, pointIndex }) => pointIndex === 1 ? `${point.y || ""} %` : `R$ ${point.y || ""}`}
-              labelAttributes={{ y: -10 }}
+              labelAttributes={{ y: 0 }}
               dotStyle={{
                 textAnchor: "middle",
                 dominantBaseline: "text-after-edge",
@@ -26,11 +26,13 @@ const ChartModel = ({ id, series, title, coin }) => {
             />
             <Ticks
               axis="y"
-              lineLength="100%"
+              opacity={10}
+              lineLength="99%"
               lineVisible={true}
+              lineOffset={50}
               lineStyle={{ stroke: "lightgray" }}
-              labelStyle={{ textAnchor: "start", dominantBaseline: "middle", fill: "lightgray" }}
-              labelAttributes={{ x: -5 }}
+              labelStyle={{ dominantBaseline: "middle", fill: "lightgray" }}
+              labelAttributes={{ x: 0 }}
             />
           </Layer>
         </Chart>

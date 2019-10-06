@@ -15,7 +15,7 @@ const ChartModel = ({ id, series, title, coin }) => {
           <Layer width="95%" height="100%" position="center top">
             <Dots ellipseRadiusY={10} dotType="symbol" symbolType="diamond"/>
             <Labels
-              label={({ point, pointIndex }) => pointIndex === 1 ? `${point.y || ""} %` : `R$ ${point.y || ""}`}
+              label={({ point, pointIndex }) => pointIndex === 1 ? `${point.y || ""} %` : `$ ${point.y || ""}`}
               labelAttributes={{ y: 0 }}
               dotStyle={{
                 textAnchor: "middle",

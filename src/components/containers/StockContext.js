@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from "react";
 import axios from 'axios';
 export const Data = createContext();
 
-const ApiContext = ({ children }) => {
+const StockContext = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   const [selected, setSelected] = useState("");
@@ -17,12 +17,12 @@ const ApiContext = ({ children }) => {
   };
 
   useEffect(() => {
-    if (data) console.log(data);
-  }, [data])
-
-  useEffect(() => {
     if (selected) fetchApi();
   }, [selected]);
+
+  const loader = () => {
+    for (let index = 0; index < 1000; index++) return(index);
+  }
 
   return (
     <Data.Provider
@@ -30,6 +30,7 @@ const ApiContext = ({ children }) => {
         data,
         selected,
         isLoading: loading,
+        loader: () => loader(),
         select: option => setSelected(option.toUpperCase())
       }}
     >
@@ -38,4 +39,4 @@ const ApiContext = ({ children }) => {
   );
 };
 
-export default ApiContext;
+export default StockContext;

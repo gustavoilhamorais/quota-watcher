@@ -66,8 +66,8 @@ const Main = props => {
             <input
               type="text"
               className="form-control"
-              placeholder="Usuário"
-              aria-label="Usuário"
+              placeholder="Email"
+              aria-label="Email"
               aria-describedby="basic-addon1"
               value={email}
               onChange={input => setEmail(input.target.value)}
